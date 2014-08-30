@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}about - the team{% endblock %}
+
+{% block meta_description %}{% endblock %}
+
+{% block body_content %}
+
+<article class="theTeam">
+    <a class="title">The Team</a><br>
+    <br><a href="{% url 'views.general_page' template_name='about/team/womens-squad' %}" title="Womens Squad"><img width="220" height="150" src="{% static 'images/the-girls-rowing.jpg' %}" alt="The Girls" /><br>The Girls</a>
+    <a href="{% url 'views.general_page' template_name='about/team/mens-squad' %}" title="Mens Squad"><img width="250" height="150" src="{% static 'images/the-men-rowing.jpg' %}" alt="The Guys" /><br>The Guys</a>
+    <a href="{% url 'views.general_page' template_name='about/team/coxes' %}" title="Coxes"><img width="220" height="150" src="{% static 'images/the-cox.jpg' %}" alt="Coxswain" /><br>Coxswain</a>
+    <a href="{% url 'views.general_page' template_name='about/team/coaches' %}" title="Coaches"><img width="150" height="150" src="{% static 'images/the-coach.jpg' %}" alt="Coaches" /><br>Coaches</a>
+</article>
+
+{% endblock %}

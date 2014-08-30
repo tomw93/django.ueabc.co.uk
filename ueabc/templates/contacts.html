@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}contacts{% endblock %}
+
+{% block meta_description %}The UEABC committee - faces of the rowing club - with their respected title, description and contact details.{% endblock %}
+
+{% block body_content %}
+
+<article class="contacts">  
+    <a class="title">UEA Union</a><br><br>
+    <p>Address to UEA Rowing at the following address: Union of UEA Students, Union House, UEA, Norwich NR4 7TJ</p><br><br>
+
+    <a class="title">Committee</a><br><br>
+    
+    {% if committee_list %}
+        {% for person in committee_list %}
+            {% with "images/committee/"|add:person.position|add:'.jpg'|cut:" " as image_static %}
+            <ul> 
+                <li><img src="{% static image_static %}" alt="{{person.firstname}} {{person.surname}}" /></li>
+                <li>{{ person.position }} : {{person.firstname}} {{person.surname}}<br>
+                <a href="mailto:{{ person.email }}" title="email">{{ person.email }}</a><br> 
+                {{ person.contact_description }}<br>
+                </li>
+            </ul>
+            <hr>
+            {% endwith %}
+        {% endfor %}
+    {% endif %}
+</article>
+
+{% endblock %}

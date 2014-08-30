@@ -1,0 +1,132 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<meta name="description" content="{% block meta_description %}{% endblock %}">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+
+		<link rel="stylesheet/less" type="text/css" href="{% static 'css/style.less' %}" />
+		<link rel="stylesheet/less" type="text/css" href="{% static 'css/flexnav.less' %}" />  
+		{% for css in additional_css %}
+			<link rel="stylesheet/less" type="text/css" href="{% static 'css/' %}{{ css }}" /> 
+		{% endfor %}
+
+		<script src="{% static 'js/less.js' %}"></script>
+		<script src="{% static 'js/jquery-1.7.2.min.js' %}"></script>
+		<script src="{% static 'js/jquery.flexnav.min.js' %}"></script>
+		{% for js in additional_js %}
+			<script src="{% static 'js/' %}{{ js }}"></script>
+		{% endfor %}
+
+		<script>
+			$(document).ready(function(){
+		    	
+		    	$(".mainHeader nav ol li").each(function(){
+					var href = window.location + $(this).find("a").attr("href");
+
+					if(href === window.location.pathname){
+						$(this).addClass("active");
+					}
+				});
+
+				var pull 		= $("#pull");
+					menu 		= $("nav ol");
+					menuHeight	= menu.height();
+
+				$(pull).on("click", function(e) {
+					e.preventDefault();
+					menu.slideToggle();
+				});
+
+				$(window).resize(function(){
+	        		var w = $(window).width();
+	        		if(w > 320 && menu.is(":hidden")) {
+	        			menu.removeAttr("style");
+	        		}
+	    		});
+			});
+		</script>
+
+		<title>UEABC - {% block title %}{% endblock %}</title>
+
+	</head>
+
+	<body class="body">
+		<div class="mainWrapper">
+			<img class="UEABClogo" src="{% static 'images/logo.png' %}">
+			<div class="websiteTitle">UEA Boat Club</div>
+			<div class="menu-button">menu<img src="{% static 'images/UEABC-Logo.png' %}" alt="UEABC Logo" /></div>
+
+			<nav class="navigation"><ul class="flexnav" data-breakpoint="749">
+				<li class="active"><a href="/" title="home">home</a></li>
+				<li><a title="about us">about us</a>
+					<ul>
+					 	<li><a href="{% url 'views.general_page' template_name='about/us' %}" title="About UEABC">about UEABC</a></li>
+						<li><a href="{% url 'views.general_page' template_name='about/rowing' %}" title="About Rowing">about rowing</a></li>
+						<li><a href="{% url 'views.general_page' template_name='about/recruitment' %}" title="recruitment">recruitment</a></li>
+	   		                <li><a href="{% url 'views.general_page' template_name='about/where-we-row' %}" title="Where We Row">where we row</a></li>
+	    	                <li><a href="{% url 'views.general_page' template_name='about/donations' %}" title="Donations">donations</a></li>
+	    	                <li><a href="{% url 'views.general_page' template_name='about/team/index' %}" title="The Team">the team</a>
+			             	<ul>
+			                	<li><a href="{% url 'views.general_page' template_name='about/team/womens-squad' %}" title="Womens Squad">womens squad</a></li>
+			                	<li><a href="{% url 'views.general_page' template_name='about/team/mens-squad' %}" title="Mens Squad">mens squad</a></li>
+			                	<li><a href="{% url 'views.general_page' template_name='about/team/coxes' %}" title="Coxes">coxes</a></li>
+			                	<li><a href="{% url 'views.general_page' template_name='about/team/coaches' %}" title="Coaches">coaches</a></li>
+			           		</ul>
+		           		</li>
+	                </ul>
+				</li>
+				<li><a title="Training">training</a>
+					<ul>
+	                    <li><a href="{% url 'views.general_page' template_name='training/boathouse' %}" title="Boathouse">boathouse</a></li>
+	                    <li><a href="{% url 'views.general_page' template_name='training/boats' %}" title="Boats">boats</a></li>
+	                    <li><a href="{% url 'views.general_page' template_name='training/land' %}" title="Land Training">land training</a></li>
+	                    <li><a href="{% url 'views.general_page' template_name='training/learn-to-row' %}" title="Learn to Row">learn to row</a></li>
+	                    <li><a href="{% url 'views.general_page' template_name='training/camp' %}" title="Training Camp">training camp</a></li>
+	                </ul>
+	            </li>
+				<li><a title="Results">results</a>
+					<ul class="results">
+						<li><a href="{% url 'views.results' '2013-14' %}" title="Results 2013/14">results 2013/14</a></li>
+		                <li><a href="{% url 'views.results' '2012-13' %}" title="Results 2012/13">results 2012/13</a></li>
+		                <li><a href="{% url 'views.results' '2011-12' %}" title="Results 2011/12">results 2011/12</a></li>
+		                <li><a href="{% url 'views.results' '2010-11' %}" title="Results 2010/11">results 2010/11</a></li>
+					</ul>
+	            </li>
+				<li><a title="Media">media</a>
+		            <ul>
+		                <li><a href="{% url 'views.news' %}" title="News">news</a></li>
+		                <li><a href="{% url 'views.videos' %}" title="Videos">videos</a></li>
+		                <li><a href="{% url 'views.general_page' template_name='media/photos' %}" title="Photos">photos</a>
+		                <ul>
+		                    <li><a href="{% url 'views.photos' photos='race' %}" title="Races">races</a></li>
+		                    <li><a href="{% url 'views.photos' photos='training' %}" title="Training">training</a></li>
+		                    <li><a href="{% url 'views.photos' photos='social' %}" title="Social Events">social events</a></li>
+		                </ul>
+		                </li>
+					</ul>
+	        	</li>
+			    <li><a href="{% url 'views.general_page' template_name='members' %}" title="Members">members</a></li>
+			    <li><a href="{% url 'views.contacts' %}" title="Contacts">contacts</a></li>
+			</ul></nav>
+			<script>$(".flexnav").flexNav();</script>
+			{% block body_content %}{% endblock %}
+
+
+			<footer class="mainFooter"> 
+				<ul>  
+					<li class="britishRowing"><a href="http://www.britishrowing.org" title="British Rowing" target="_blank"><img src="{% static 'images/share/brlogo.png' %}" alt="British Rowing" /></a></li>
+					<li class="union"><a href="http://ueastudent.com" title="UEA Union" target="_blank"><img src="{% static 'images/share/union-logo.png' %}" alt="UEA Union" /></a></li>
+					<li class="whitlingham"><a href="http://www.whitlinghamboathouses.co.uk" title="Whitlingham Boat Houses" target="_blank"><img src="{% static 'images/share/WhitlinghamBH-logo.png' %}" alt="Whitlingham Boat Houses" /></a></li>
+					<li class="facebook"><a href="https://www.facebook.com/UEABC" title="Click to view us on Facebook" target="_blank"><img src="{% static 'images/share/facebook2.png' %}" alt="Share on Facebook" /></a></li>
+					<li class="twitter"><a href="https://twitter.com/ueabc" title="Follow Us On Twitter!" target="_blank"><img class="twitter" src="{% static 'images/share/twitter2.png' %}" alt="Share on Twitter" /></a></li>
+					<li class="youtube"><a href="https://www.youtube.com/user/UEABC" title="Click to view our youtube channel!" target="_blank"><img class="youtube" src="{% static 'images/share/you_tube2.png' %}" alt="Watch on youtube" /></a></li>
+					<li class="copyright">Copyright &copy; 2014 UEABC<br>Website created by <a href="https://www.tom-wilkins.co.uk">Tom Wilkins</a><br><a href="/sitemap.php" title="site map">site map</a></li>
+
+		    	</ul>
+			</footer>
+		</div><!-- END OF MAIN WRAPPER -->
+	</body><!-- END OF BODY -->
+</html>
+

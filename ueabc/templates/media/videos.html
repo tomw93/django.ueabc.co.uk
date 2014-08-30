@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}media - videos{% endblock %}
+
+{% block meta_description %}
+Videos of UEABC both at races and in training. They are all from our YouTube Channel.
+{% endblock %}
+
+{% block body_content %}
+
+<article class="videos">
+	<a class="title">Videos</a><br>
+
+	{% if videos %}
+   		{% for video in videos %}
+   			<div class="video2">{{ video.name }}<br>
+			<iframe src="{{ video.url }}" frameborder="0" allowfullscreen></iframe><br><br></div>
+   		{% endfor %}
+   	{% endif %}
+
+</article>
+
+{% endblock %}

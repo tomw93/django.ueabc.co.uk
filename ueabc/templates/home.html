@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}home{% endblock %}
+
+{% block meta_description %}University Of East Anglia Boat Club - Competitive rowing club that caters for students of the University.{% endblock %}
+
+{% block body_content %}
+
+<div class="slider-wrapper">
+	<div class="banner-item">
+		<div id="slider" class="nivoSlider">
+			<img src="{% static 'images/slider/menRowing.png' %}" title="Alumni Race">
+			<img src="{% static 'images/slider/womenRowing2.png' %}" title="Carrow Cup">
+			<img src="{% static 'images/slider/womenRowing.png' %}" title="Derby Day">
+			<img src="{% static 'images/slider/menRowing2.png' %}" title="Henley">
+			<img src="{% static 'images/slider/menRowing3.png' %}" title="Cambridge Winter Head">
+			<img src="{% static 'images/slider/cityRowing1.png' %}" title="Rowing in the city">
+		</div><!-- slider -->
+	</div><!-- banner item-->
+</div><!-- slider wrapper -->
+<article class="pageText">
+	<a class="title">UEABC</a>
+		<p>UEA Boat Club is a competitive rowing club in Norwich that caters for students of the University of East Anglia. We are a competitive club, training and racing throughout the year at events across the UK.</p>
+		<p>We field men&#39;s and women&#39;s squads and cater for all levels of experience. See the &#39;About us&#39; the tab to find out more.</p>
+</article>
+<article class="newsFeed">
+	<a class="title">Lastest News</a>
+
+	{% if latest_news %}
+		{% for post in latest_news %}
+			<ul class="newsPost">
+		        <li class="newsDate">{{ post.date }}</li>
+		        <li class="newsContent"><div class="newsTitle"><a href="{% url 'views.news' %}">{{ post.title }}</a></div>
+		        <div class="contents">{{ post.contents|slice:':100'|cut:"\\"}}...</div></li>
+	        </ul>
+        {% endfor %}
+	{% endif %}
+</article><!-- newsFeed -->
+
+{% endblock %}

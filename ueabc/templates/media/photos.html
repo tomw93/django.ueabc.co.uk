@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}media - 
+{% if photo_type %}{{ photo_type }}{% endif %} 
+photos{% endblock %}
+
+{% block meta_description %}
+	{% if photo_type %}
+	A gallery of {{ photo_type }} pictures taken by members of the club.
+	{% else %}
+	Picture galleries for races, training, and social events.
+	{% endif %}
+{% endblock %}
+
+{% block body_content %}
+	<article class="theTeam"> 
+	{% if photo_type %}
+
+		<a class="title">{{ photo_type }} photos</a><br><br>
+        Click images to enlarge<br>
+      	{% for photo in photo_list %} 
+      		{% with "images/media/"|add:photo_type|add:"/"|add:photo.url as image_static %}
+	           	<div class="photoSize"><a href="{% static image_static %}" rel="lightbox[roadtrip]" title="{{ photo.name }}<br/>Date Taken: {{ photo.datetaken }}" style="padding:3px"><img src="{% static image_static %}" alt="{{ photo.name }}" /></a><br>{{ photo.name }}<br>Date Taken: {{ photo.name }}</div> 
+            {% endwith %} 
+        {% endfor %}
+	{% else %}
+		   
+		<a class="title">Photos</a><br><br>
+		<a href="{% url 'views.photos' photos='race' %}"><img style="max-width:330px; max-height:196px;" src="{% static 'images/media/race/CambridgeWinterHead3-2012.jpg' %}" alt="UEA Race Image Archive" /><br/>UEA Race Image Archive</a>
+		<a href="{% url 'views.photos' photos='training' %}"><img style="max-width:330px; max-height:196px;" src="{% static 'images/media/training/the-ergos.jpg' %}" alt="UEA Training Image Archive" /><br/>UEA Training Image Archive</a>
+		<a href="{% url 'views.photos' photos='social' %}"><img style="max-width:330px; max-height:196px;" src="{% static 'images/media/social/WinterBall1-2012.jpg' %}" alt="UEA Social Events Image Archive" /><br/>UEA Social Events Image Archive</a>  
+		
+	{% endif %}
+	</article>
+{% endblock %}

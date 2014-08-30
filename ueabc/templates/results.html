@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}results - {{ results.0.year.year_value }}
+{% endblock %}
+
+{% block meta_description %}
+Results for the year {{ results.0.year.year_value }} breakdown of the race, category and position.
+{% endblock %}
+
+{% block body_content %}
+	<article class="results">
+	<a class="title">{{ results.0.year.year_value }} Results</a><br><br>
+	<table class="ct01" cellspacing="0">  
+	<tbody> 
+		<tr>  
+			<th>Race</th>  
+			<th>Crew</th>  
+			<th>Position</th>
+		</tr>
+
+		{% for race in race_list %}
+			<tr><td>&nbsp;{{ race }}</td><td>
+			{% for result in results %}
+				{% if race == result.race.race_name %}
+					<div>&nbsp;{{result.category}}</div>
+				{% endif %}
+			{% endfor %}
+			</td>
+			<td>
+			{% for result in results %}
+				{% if race == result.race.race_name %}
+					<div>&nbsp;{{result.position}}</div>
+				{% endif %}
+			{% endfor %}</td>
+			</tr>
+		{% endfor %}	
+
+	</tbody>  
+	</table>
+	</article>
+{% endblock %}

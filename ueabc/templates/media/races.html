@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}media - race photos{% endblock %}
+
+{% block meta_description %}
+Picture galleries for races, training, and social events.
+{% endblock %}
+
+{% block body_content %}
+
+<article class="theTeam">
+    <a class="title">Photos - Races</a><br><br>
+    Click images to enlarge<br>
+    $sql = mysql_query("SELECT * FROM `photos` WHERE `type` = 'race' ORDER BY `dateTaken` DESC") or die("MySQL Error - Failed to Select photos");
+   
+    while ($results = mysql_fetch_array($sql)){
+            $name = $results['name'];
+            $imageUrl = $results['url'];
+            $dateTaken = $results['dateTaken'];
+        $body.= "<div class=\"photoSize\"><a href=\"racePhotos/".$imageUrl. "\" rel=\"lightbox[roadtrip]\" title=\"".$name."<br/>Date Taken: ".$dateTaken."\" style=\"padding:3px\"><img src=\"racePhotos/" . $imageUrl . "\" alt=\"" . $name . "\" /></a><br/>".$name."<br/>Date Taken: ". $dateTaken."</div>";    
+    } 
+    
+</article>
+
+{% endblock %}

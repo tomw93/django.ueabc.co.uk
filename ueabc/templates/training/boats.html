@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}training - boats{% endblock %}
+
+{% block meta_description %}About the boats we currently own and use at UEABC, along with possible boats we want to get for the future.{% endblock %}
+
+{% block body_content %}
+
+<article class="training">
+    <a class="title">The Boats</a><br>
+    <br><img class="boats" src="{% static 'images/the-oars.jpg' %}" alt="The Oars" />
+    <img class="boats" src="{% static 'images/the-stampfli.jpg' %}" alt="The Boat" />
+    At UEA Boat Club We have a fleet of four 8+s and four 4+s, including a Stampfli 8+ and 4+ for the top men&#39;s crews, and a Filippi 8+ for the top women&#39;s crew. Our boats are regularly updated and we have access to some small boats and sculls during the summer. We also have 2 coaching launches: a catamaran which was new this year, and an old Tin Fish which is due to be replaced imminently.<br />
+</article>
+
+{% endblock %}

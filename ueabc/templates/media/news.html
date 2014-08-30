@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}media - news{% endblock %}
+
+{% block meta_description %}
+The latest news from UEABC, summary of each race and any other news.
+{% endblock %}
+
+{% block body_content %}
+
+<article class="about">
+	<a class="title">News</a><br>
+    <br></p> 
+   
+   	{% if news %}
+   		{% for post in news %}
+        {% autoescape off %}
+   			<p><b>{{ post.date }}</b> {{ post.title }}<br><br>{{ post.contents }}</p><br><hr>
+        {% endautoescape %}
+   		{% endfor %}
+   	{% endif %}
+
+</article>
+
+{% endblock %}

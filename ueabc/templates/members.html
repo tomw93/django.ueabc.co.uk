@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}members{% endblock %}
+
+{% block meta_description %}Members Area for the Squads.{% endblock %}
+
+{% block body_content %}
+
+<article class="members">
+    <content>
+    	<a class="title">Members</a><br><br>
+		<form action="\" method="post">
+	      	<input class="name" type="text" name="username" placeholder="enter username...">
+	        <input class="pass" type="password" name="userpassword" placeholder="enter password...">
+	        <button class="login" type="submit" name="Login">Login</button>
+	    </form>
+     </content>
+  </article>
+
+{% endblock %}
